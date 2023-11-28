@@ -22,7 +22,4 @@ var ContactDictionary = new Dictionary<Contact, List<Contact>>()
 	{defaultContacts[6],new List<Contact>(){defaultContacts[2],defaultContacts[1],defaultContacts[6]}}
 };
 
-foreach (var item in ContactDictionary)
-{
-	Utilities.WriteContact(item.Key);
-}
+Utilities.WriteContactDictionary(ContactDictionary);

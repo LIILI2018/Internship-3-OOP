@@ -12,5 +12,12 @@ namespace Phone_Book_App.Classes.Utilities
 		{
             Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhineNumber );
         }
+		static public void WriteContactDictionary(Dictionary<Contact, List<Contact>> dict)
+		{
+			foreach (var item in dict)
+			{
+				WriteContact(item.Key);
+			}
+		}
 	}
 }
