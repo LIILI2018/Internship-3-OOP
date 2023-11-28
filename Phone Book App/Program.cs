@@ -67,7 +67,8 @@ void OpenSubmenu()
 	switch (x)
 	{
 		case 1:
-			
+			var contact = Utilities.FindContact(ContactDictionary);
+			Utilities.WriteCallsByDate();
 			break;
 
 		case 2:
