@@ -34,3 +34,11 @@ else if (x == 2)
 {
 	ContactDictionary.Add(Utilities.AddContact(),new List<Contact>());
 }
+else if(x == 3)
+{
+	x = 2 
+}
+else if ( x == 4)
+{
+
+}

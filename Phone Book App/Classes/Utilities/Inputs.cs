@@ -61,7 +61,6 @@ namespace Phone_Book_App.Classes.Utilities
 
 			return y;
 		}
-
 		public static void Wait(string txt)
 		{
 			Console.WriteLine(txt);
