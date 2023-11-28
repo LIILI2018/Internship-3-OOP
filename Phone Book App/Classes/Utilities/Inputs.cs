@@ -1,9 +1,9 @@
 ﻿
 namespace Phone_Book_App.Classes.Utilities
 {
-	static public class Inputs
+	public class Inputs
 	{
-		static int IntInput(string txt)
+		public static int IntInput(string txt)
 		{
 			Console.WriteLine(txt);
 			int y;
@@ -15,14 +15,14 @@ namespace Phone_Book_App.Classes.Utilities
 			Console.Clear();
 			return y;
 		}
-		static string StringInput(string txt)
+		public static string StringInput(string txt)
 		{
             Console.WriteLine(txt);
             var y = Console.ReadLine();
 			Console.Clear();
 			return y;
 		}
-		static DateTime DateInput(string txt)
+		public static DateTime DateInput(string txt)
 		{
             Console.WriteLine(txt);
             DateTime y;
@@ -35,7 +35,7 @@ namespace Phone_Book_App.Classes.Utilities
 
 			return y;
 		}
-		static double DoubleInput(string txt)
+		public static double DoubleInput(string txt)
 		{
             Console.WriteLine(txt);
 			double y;
@@ -48,13 +48,27 @@ namespace Phone_Book_App.Classes.Utilities
 
 			return y;
 		}
-		static void Wait(String txt)
+		public static long LongInput(string txt)
+		{
+			Console.WriteLine(txt);
+			long y;
+			bool success = false;
+			do
+			{
+				success = long.TryParse(Console.ReadLine(), out y);
+			} while (!success);
+			Console.Clear();
+
+			return y;
+		}
+
+		public static void Wait(string txt)
 		{
 			Console.WriteLine(txt);
 			Console.WriteLine("Klikni enter za nastavak: ");
 			Console.ReadLine();
 		}
-		static int OptionInput(List<string> txt)
+		public static int OptionInput(List<string> txt)
 		{
 			Console.WriteLine("0 - Izlaz iz aplikacije");
 

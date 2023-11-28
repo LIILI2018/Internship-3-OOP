@@ -19,5 +19,11 @@ namespace Phone_Book_App.Classes.Utilities
 				WriteContact(item.Key);
 			}
 		}
+		
+		static public Contact AddContact() 
+		{
+			var newContact = new Contact(Inputs.StringInput("Unesi ime kontakta: "),Inputs.StringInput("Unesi prezime kontakta"),Inputs.LongInput("Unesi Broj kontakta"));
+			return newContact;
+		}
 	}
 }
