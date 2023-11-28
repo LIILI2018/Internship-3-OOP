@@ -3,13 +3,14 @@ using Phone_Book_App.Classes.Utilities;
 
 var defaultContacts = new List<Contact>() 
 {
-	new Contact("Luko","Paljetak","0913630556"),
+	new Contact("Luko","Paljetak","0913630551"),
+	new Contact("Luko","Paljetak","0913630555"),
 	new Contact("Jean","Marquis","1234567890"),
 	new Contact("Petar","Stijena","0987654321"),
 	new Contact("Ivan","Leptirić","1639653474"),
 	new Contact("Dušan","Stijena","1493273434"),
-	new Contact("Kapetan Ivan","Slavuj","0253744854"),
-	new Contact("Max","Verstapen","9999999999")
+	new Contact("Kapetan Ivan","Slavuj","1"),
+	new Contact("Max","Verstapen","0")
 
 };
 var DefaultCalls = new List<Call>
@@ -47,14 +48,14 @@ void StartMenu() {
 				Contact.WriteContactDictionary(ContactDictionary);
 				Inputs.Wait("");
 				break;
-			//+ 
+			//+ +
 			case 2:
 				ContactDictionary.Add(Contact.AddContact(ContactDictionary), new List<Call>());
 				break;
-
+			//
 			case 3:
 				var contact = Contact.FindContact(ContactDictionary);
-				ContactDictionary.Remove(contact);
+                ContactDictionary.Remove(contact);
 				break;
 
 			case 4:

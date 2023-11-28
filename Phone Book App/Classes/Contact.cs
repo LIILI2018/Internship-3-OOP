@@ -6,9 +6,9 @@ namespace Phone_Book_App.Classes
 {
     public class Contact
     {
-        public string Name { get; set; }
-        public string Surename { get; set; }
-        public string  PhoneNumber { get; set; }
+        private string Name { get; set; }
+        private string Surename { get; set; }
+        private string  PhoneNumber { get; set; }
         public Preferences Preferences { get; set; } = Preferences.Normal;
 
         public Contact(string name, string surename, string phoneNumber) 
@@ -16,6 +16,33 @@ namespace Phone_Book_App.Classes
             Name = name; Surename = surename; PhoneNumber = phoneNumber;
         }
 
+		//
+		static public void WriteContact(Contact contact)
+		{
+			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber);
+		}
+		//
+		static public void WriteContactDictionary(Dictionary<Contact, List<Call>> dict)
+		{
+			foreach (var item in dict.Keys)
+			{
+				WriteContact(item);
+			}
+		}
+		// + +
+		static public Contact AddContact(Dictionary<Contact, List<Call>> dict)
+		{
+			var name = Inputs.StringInput("Unesi ime kontakta: ");
+			var surename = Inputs.StringInput("Unesi prezime kontakta: ");
+			var phoneNumber = Inputs.StringInput("Unesi Broj kontakta: ");
+			while (CheckIfNumberIsTaken(dict,phoneNumber))
+			{
+				phoneNumber = Inputs.StringInput("Broj je već zauzet unesi novi: ");
+			}
+			var newContact = new Contact(name, surename, phoneNumber);
+			return newContact;
+		}
+		//
 		static public Preferences EditPreference()
 		{
 			var x = Inputs.OptionInput(new List<string> { "Favorit", "Normalan", "Blokiran" });
@@ -33,29 +60,7 @@ namespace Phone_Book_App.Classes
 			}
 			return Preferences.Normal;
 		}
-		static public void WriteContact(Contact contact)
-		{
-			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber);
-		}
-		static public void WriteContactDictionary(Dictionary<Contact, List<Call>> dict)
-		{
-			foreach (var item in dict.Keys)
-			{
-				WriteContact(item);
-			}
-		}
-		static public Contact AddContact(Dictionary<Contact, List<Call>> dict)
-		{
-			var name = Inputs.StringInput("Unesi ime kontakta: ");
-			var surename = Inputs.StringInput("Unesi prezime kontakta: ");
-			var phoneNumber = Inputs.StringInput("Unesi Broj kontakta: ");
-			while (CheckIfNumberIsTaken(dict,phoneNumber))
-			{
-				phoneNumber = Inputs.StringInput("Broj je već zauzet unesi novi: ");
-			}
-			var newContact = new Contact(name, surename, phoneNumber);
-			return newContact;
-		}
+		//+ +
 		static public Contact FindContact(Dictionary<Contact, List<Call>> dict)
 		{
 			int x = Inputs.OptionInput(new List<string> { "1 - Pronađi kontakt po imenu i prezimenu", "2 - Pronađi po broju" });
@@ -67,9 +72,10 @@ namespace Phone_Book_App.Classes
 			{
 				return FindContactByNumber(dict);
 			}
-			return new Contact("", "", "0");
+			return new Contact("", "", "");
 
 		}
+		//+ +
 		static private Contact FindContactByName(Dictionary<Contact, List<Call>> dict)
 		{
 			var name = Inputs.StringInput("Unesi ime kontakta");
@@ -84,7 +90,7 @@ namespace Phone_Book_App.Classes
 			}
 			if (contacts.Count() > 1)
 			{
-				var i = 0;
+				var i = 1;
 				foreach (var item in contacts)
 				{
 					Console.WriteLine("Za ovaj kontakt daberi - " + i);
@@ -97,20 +103,32 @@ namespace Phone_Book_App.Classes
 			else if (contacts.Count() == 0)
 			{
 				Console.WriteLine("Kontakt nije pronađen");
+				Inputs.Wait("");
+				return new Contact("","","");
 			}
-			return new Contact("", "","");
+			else { 
+				return contacts[0];
+			}
 		}
+		//+ +
 		static private Contact FindContactByNumber(Dictionary<Contact, List<Call>> dict)
 		{
+			var numberFound = false;
 			var phoneNumber = Inputs.StringInput("Unesi broj mobitela");
 			foreach (var item in dict.Keys)
 			{
 				if (item.PhoneNumber == phoneNumber)
 				{
+					numberFound = true;
 					return item;
 				}
 			}
+			if (!numberFound)
+			{
+				Inputs.Wait("Broj nije pronađen");
+			}
 			return new Contact("", "", "");
+
 		}
 		static private bool CheckIfNumberIsTaken(Dictionary<Contact, List<Call>> dict, string phoneNumber)
 		{
