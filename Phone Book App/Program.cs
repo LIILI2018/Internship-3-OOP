@@ -1,7 +1,7 @@
 ﻿using Phone_Book_App.Classes;
 using Phone_Book_App.Classes.Utilities;
 
-Console.WriteLine(Inputs.OptionInput(new List<string> { "", "", "", "" }));
+Console.WriteLine(Inputs.RangeElementInput(1,3,"DAdA"));
 Console.ReadLine();
 /*
 var defaultContacts = new List<Contact>() 
