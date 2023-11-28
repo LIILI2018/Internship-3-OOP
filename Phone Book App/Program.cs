@@ -1,7 +1,6 @@
 ﻿using Phone_Book_App.Classes;
 using Phone_Book_App.Classes.Utilities;
 
-
 var defaultContacts = new List<Contact>() 
 {
 	new Contact("Luko","Paljetak",0913630556),
@@ -32,43 +31,46 @@ var ContactDictionary = new Dictionary<Contact, List<Call>>()
 	{defaultContacts[6],DefaultCalls}
 };
 
-int x;
-x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Editiranje preferenca kontakta", "5 - Upravljanje kontaktom" });
 
-switch (x)
-{	
-	case 1:
-		Utilities.WriteContactDictionary(ContactDictionary);
-		break;
+void StartMenu() {
+	int x;
+	x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Editiranje preferenca kontakta", "5 - Upravljanje kontaktom" });
 
-	case 2:
-		ContactDictionary.Add(Utilities.AddContact(), new List<Call>());
-		break;
+	switch (x)
+	{	
+		case 1:
+			Contact.WriteContactDictionary(ContactDictionary);
+			break;
 
-	case 3:
-		var contact = Utilities.FindContact(ContactDictionary);
-		ContactDictionary.Remove(contact);
-        break;
+		case 2:
+			ContactDictionary.Add(Contact.AddContact(), new List<Call>());
+			break;
 
-	case 4:
-		var Contact = Utilities.FindContact(ContactDictionary);
-		Contact.Preferences = Utilities.EditPreference();
-		break;
-	case 5:
-		OpenSubmenu();
-		break;
-	case 6:
-		break;
+		case 3:
+			var contact = Contact.FindContact(ContactDictionary);
+			ContactDictionary.Remove(contact);
+			break;
+
+		case 4:
+			contact = Contact.FindContact(ContactDictionary);
+			contact.Preferences = Contact.EditPreference();
+			break;
+		case 5:
+			OpenSubmenu();
+			break;
+		case 6:
+			break;
+	}
 }
-
 void OpenSubmenu()
 {
+	int x;
 	x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve pozive", "2 - Kreirej novi poziv"});
 	switch (x)
 	{
 		case 1:
-			var contact = Utilities.FindContact(ContactDictionary);
-			Utilities.WriteCallsByDate(ContactDictionary[contact]);
+			var contact = Contact.FindContact(ContactDictionary);
+			Call.WriteCallsByDate(ContactDictionary[contact]);
 			break;
 
 		case 2:

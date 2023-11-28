@@ -8,14 +8,21 @@ namespace Phone_Book_App.Classes
     {
         public string Name { get; set; }
         public string Surename { get; set; }
-        public long  PhineNumber { get; set; }
+        public long  PhoneNumber { get; set; }
         public Preferences Preferences { get; set; } = Preferences.Normal;
-
 
         public Contact(string name, string surename, long phoneNumber) 
         {
-            Name = name; Surename = surename; PhineNumber = phoneNumber;
+            Name = name; Surename = surename; PhoneNumber = phoneNumber;
         }
+		public Contact()
+		{
+			Name = "";
+			Surename = "";
+			PhoneNumber = 0;
+		}
+
+
 		static public Preferences EditPreference()
 		{
 			var x = Inputs.OptionInput(new List<string> { "Favorit", "Normalan", "Blokiran" });
@@ -35,7 +42,7 @@ namespace Phone_Book_App.Classes
 		}
 		static public void WriteContact(Contact contact)
 		{
-			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhineNumber);
+			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber);
 		}
 		static public void WriteContactDictionary(Dictionary<Contact, List<Call>> dict)
 		{
@@ -63,7 +70,7 @@ namespace Phone_Book_App.Classes
 			return new Contact("", "", 0);
 
 		}
-		static public Contact FindContactByName(Dictionary<Contact, List<Call>> dict)
+		static private Contact FindContactByName(Dictionary<Contact, List<Call>> dict)
 		{
 			var name = Inputs.StringInput("Unesi ime kontakta");
 			var surename = Inputs.StringInput("Unesi prezime kontakta");
@@ -81,7 +88,7 @@ namespace Phone_Book_App.Classes
 				foreach (var item in contacts)
 				{
 					Console.WriteLine("Za ovaj kontakt daberi - " + i);
-					Utilities.WriteContact(item);
+					Contact.WriteContact(item);
 					i++;
 				}
 				var x = Inputs.RangeElementInput(1, i, "");
@@ -98,7 +105,7 @@ namespace Phone_Book_App.Classes
 			var phoneNumber = Inputs.LongInput("Unesi broj mobitela");
 			foreach (var item in dict.Keys)
 			{
-				if (item.PhineNumber == phoneNumber)
+				if (item.PhoneNumber == phoneNumber)
 				{
 					return item;
 				}
