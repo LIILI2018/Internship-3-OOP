@@ -118,6 +118,13 @@ namespace Phone_Book_App.Classes.Utilities
 			}
 			return sortedList;
 		}
+		static public void WriteCall(Call call)
+		{
+            Console.WriteLine("Poziv je uspostavljen: " + call.CallStart);
+			Console.WriteLine("Status poziva: " + call.CallStatus);
+			Console.WriteLine();
+		}
+
 		static public void WriteCallsByDate(List<Call> calls)
 		{
 			var sortedCalls = SortCallsByDate(calls);
