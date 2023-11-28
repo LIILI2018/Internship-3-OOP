@@ -8,10 +8,10 @@ namespace Phone_Book_App.Classes
     {
         public string Name { get; set; }
         public string Surename { get; set; }
-        public long  PhoneNumber { get; set; }
+        public string  PhoneNumber { get; set; }
         public Preferences Preferences { get; set; } = Preferences.Normal;
 
-        public Contact(string name, string surename, long phoneNumber) 
+        public Contact(string name, string surename, string phoneNumber) 
         {
             Name = name; Surename = surename; PhoneNumber = phoneNumber;
         }
@@ -44,9 +44,16 @@ namespace Phone_Book_App.Classes
 				WriteContact(item);
 			}
 		}
-		static public Contact AddContact()
+		static public Contact AddContact(Dictionary<Contact, List<Call>> dict)
 		{
-			var newContact = new Contact(Inputs.StringInput("Unesi ime kontakta: "), Inputs.StringInput("Unesi prezime kontakta"), Inputs.LongInput("Unesi Broj kontakta"));
+			var name = Inputs.StringInput("Unesi ime kontakta: ");
+			var surename = Inputs.StringInput("Unesi prezime kontakta: ");
+			var phoneNumber = Inputs.StringInput("Unesi Broj kontakta: ");
+			while (CheckIfNumberIsTaken(dict,phoneNumber))
+			{
+				phoneNumber = Inputs.StringInput("Broj je već zauzet unesi novi: ");
+			}
+			var newContact = new Contact(name, surename, phoneNumber);
 			return newContact;
 		}
 		static public Contact FindContact(Dictionary<Contact, List<Call>> dict)
@@ -60,7 +67,7 @@ namespace Phone_Book_App.Classes
 			{
 				return FindContactByNumber(dict);
 			}
-			return new Contact("", "", 0);
+			return new Contact("", "", "0");
 
 		}
 		static private Contact FindContactByName(Dictionary<Contact, List<Call>> dict)
@@ -91,11 +98,11 @@ namespace Phone_Book_App.Classes
 			{
 				Console.WriteLine("Kontakt nije pronađen");
 			}
-			return new Contact("", "", 0);
+			return new Contact("", "","");
 		}
-		static public Contact FindContactByNumber(Dictionary<Contact, List<Call>> dict)
+		static private Contact FindContactByNumber(Dictionary<Contact, List<Call>> dict)
 		{
-			var phoneNumber = Inputs.LongInput("Unesi broj mobitela");
+			var phoneNumber = Inputs.StringInput("Unesi broj mobitela");
 			foreach (var item in dict.Keys)
 			{
 				if (item.PhoneNumber == phoneNumber)
@@ -103,7 +110,18 @@ namespace Phone_Book_App.Classes
 					return item;
 				}
 			}
-			return new Contact("", "", 0);
+			return new Contact("", "", "");
+		}
+		static private bool CheckIfNumberIsTaken(Dictionary<Contact, List<Call>> dict, string phoneNumber)
+		{
+			foreach (var item in dict.Keys)
+			{
+				if (item.PhoneNumber == phoneNumber)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
 	}

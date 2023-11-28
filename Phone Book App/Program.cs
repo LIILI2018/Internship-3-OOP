@@ -1,18 +1,15 @@
 ﻿using Phone_Book_App.Classes;
 using Phone_Book_App.Classes.Utilities;
 
-Console.WriteLine(Inputs.RangeElementInput(1,3,"DAdA"));
-Console.ReadLine();
-/*
 var defaultContacts = new List<Contact>() 
 {
-	new Contact("Luko","Paljetak",0913630556),
-	new Contact("Jean","Marquis",1234567890),
-	new Contact("Petar","Stijena",0987654321),
-	new Contact("Ivan","Leptirić",1639653474),
-	new Contact("Dušan","Stijena",1493273434),
-	new Contact("Kapetan Ivan","Slavuj",0253744854),
-	new Contact("Max","Verstapen",9999999999)
+	new Contact("Luko","Paljetak","0913630556"),
+	new Contact("Jean","Marquis","1234567890"),
+	new Contact("Petar","Stijena","0987654321"),
+	new Contact("Ivan","Leptirić","1639653474"),
+	new Contact("Dušan","Stijena","1493273434"),
+	new Contact("Kapetan Ivan","Slavuj","0253744854"),
+	new Contact("Max","Verstapen","9999999999")
 
 };
 var DefaultCalls = new List<Call>
@@ -35,35 +32,42 @@ var ContactDictionary = new Dictionary<Contact, List<Call>>()
 };
 
 
+StartMenu();
+
 void StartMenu() {
 	int x;
-	x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Editiranje preferenca kontakta", "5 - Upravljanje kontaktom" });
+	do {  
+		Console.Clear();
+		x = Inputs.OptionInput(new List<string> { "1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Editiranje preferenca kontakta", "5 - Upravljanje kontaktom","6 - Ispis svih pozia","7 -izlaz iz aplikacije" });
+		
+		switch (x)
+		{	
+			//+ +
+			case 1:
+				Contact.WriteContactDictionary(ContactDictionary);
+				Inputs.Wait("");
+				break;
+			//+ 
+			case 2:
+				ContactDictionary.Add(Contact.AddContact(ContactDictionary), new List<Call>());
+				break;
 
-	switch (x)
-	{	
-		case 1:
-			Contact.WriteContactDictionary(ContactDictionary);
-			break;
+			case 3:
+				var contact = Contact.FindContact(ContactDictionary);
+				ContactDictionary.Remove(contact);
+				break;
 
-		case 2:
-			ContactDictionary.Add(Contact.AddContact(), new List<Call>());
-			break;
-
-		case 3:
-			var contact = Contact.FindContact(ContactDictionary);
-			ContactDictionary.Remove(contact);
-			break;
-
-		case 4:
-			contact = Contact.FindContact(ContactDictionary);
-			contact.Preferences = Contact.EditPreference();
-			break;
-		case 5:
-			OpenSubmenu();
-			break;
-		case 6:
-			break;
-	}
+			case 4:
+				contact = Contact.FindContact(ContactDictionary);
+				contact.Preferences = Contact.EditPreference();
+				break;
+			case 5:
+				OpenSubmenu();
+				break;
+			case 6:
+				break;
+		}
+	} while (x != 7);
 }
 void OpenSubmenu()
 {
@@ -80,4 +84,4 @@ void OpenSubmenu()
 			break;
 
 	}
-}*/
+}
