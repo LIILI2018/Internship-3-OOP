@@ -2,7 +2,7 @@
 
 namespace Phone_Book_App.Classes
 {
-	internal class Call
+	public class Call
 	{
 		public DateTime CallStart { get; set; }
 		public CallStatuses CallStatus { get; set; } = CallStatuses.Finished;

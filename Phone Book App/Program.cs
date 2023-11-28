@@ -21,28 +21,28 @@ var DefaultCalls = new List<Call>
 	new Call(DateTime.Now.AddDays(-2)),
 	new Call(DateTime.Now.AddDays(-5)),
 };
-var ContactDictionary = new Dictionary<Contact, List<Contact>>()
+var ContactDictionary = new Dictionary<Contact, List<Call>>()
 {
-	{defaultContacts[0],new List<Contact>(){defaultContacts[1],defaultContacts[2],defaultContacts[3]}},
-	{defaultContacts[1],new List<Contact>(){defaultContacts[2],defaultContacts[3],defaultContacts[5]}},
-	{defaultContacts[2],new List<Contact>(){defaultContacts[1],defaultContacts[4],defaultContacts[3]}},
-	{defaultContacts[3],new List<Contact>(){defaultContacts[2],defaultContacts[5],defaultContacts[3]}},
-	{defaultContacts[4],new List<Contact>(){defaultContacts[4],defaultContacts[2],defaultContacts[6]}},
-	{defaultContacts[5],new List<Contact>(){defaultContacts[1],defaultContacts[5],defaultContacts[3]}},
-	{defaultContacts[6],new List<Contact>(){defaultContacts[2],defaultContacts[1],defaultContacts[6]}}
+	{defaultContacts[0],DefaultCalls},
+	{defaultContacts[1],DefaultCalls},
+	{defaultContacts[2],DefaultCalls},
+	{defaultContacts[3],DefaultCalls},
+	{defaultContacts[4],DefaultCalls},
+	{defaultContacts[5],DefaultCalls},
+	{defaultContacts[6],DefaultCalls}
 };
 
 int x;
 x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Editiranje preferenca kontakta", "5 - Upravljanje kontaktom" });
 
 switch (x)
-{
+{	
 	case 1:
 		Utilities.WriteContactDictionary(ContactDictionary);
 		break;
 
 	case 2:
-		ContactDictionary.Add(Utilities.AddContact(), new List<Contact>());
+		ContactDictionary.Add(Utilities.AddContact(), new List<Call>());
 		break;
 
 	case 3:
@@ -67,11 +67,10 @@ void OpenSubmenu()
 	switch (x)
 	{
 		case 1:
-			Utilities.WriteContactDictionary(ContactDictionary);
+			
 			break;
 
 		case 2:
-			ContactDictionary.Add(Utilities.AddContact(), new List<Contact>());
 			break;
 
 	}

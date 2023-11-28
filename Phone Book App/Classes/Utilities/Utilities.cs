@@ -10,7 +10,7 @@ namespace Phone_Book_App.Classes.Utilities
             Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhineNumber );
         }
 
-		static public void WriteContactDictionary(Dictionary<Contact, List<Contact>> dict)
+		static public void WriteContactDictionary(Dictionary<Contact, List<Call>> dict)
 		{
 			foreach (var item in dict.Keys)
 			{
@@ -22,7 +22,7 @@ namespace Phone_Book_App.Classes.Utilities
 			var newContact = new Contact(Inputs.StringInput("Unesi ime kontakta: "),Inputs.StringInput("Unesi prezime kontakta"),Inputs.LongInput("Unesi Broj kontakta"));
 			return newContact;
 		}
-		static public Contact FindContact(Dictionary<Contact, List<Contact>> dict)
+		static public Contact FindContact(Dictionary<Contact, List<Call>> dict)
 		{
 			int x = Inputs.OptionInput(new List<string> { "1 - Pronađi kontakt po imenu i prezimenu", "2 - Pronađi po broju" });
 			if (x == 1)
@@ -36,7 +36,7 @@ namespace Phone_Book_App.Classes.Utilities
 			return new Contact("", "", 0);
 
 		}
-		static public Contact FindContactByName(Dictionary<Contact, List<Contact>> dict)
+		static public Contact FindContactByName(Dictionary<Contact, List<Call>> dict)
 		{
 			var name = Inputs.StringInput("Unesi ime kontakta");
 			var surename = Inputs.StringInput("Unesi prezime kontakta");
@@ -66,7 +66,7 @@ namespace Phone_Book_App.Classes.Utilities
 			}
 			return new Contact("","",0);
 		}
-		static public Contact FindContactByNumber(Dictionary<Contact, List<Contact>> dict)
+		static public Contact FindContactByNumber(Dictionary<Contact, List<Call>> dict)
 		{
 			var phoneNumber = Inputs.LongInput("Unesi broj mobitela");
 			foreach (var item in dict.Keys)
