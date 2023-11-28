@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Phone_Book_App.Classes.Enums;
 
 namespace Phone_Book_App.Classes.Utilities
 {
 	static public class Utilities
-	{
+	{ 
+		//+ +
 		static public void WriteContact(Contact contact)
 		{
             Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhineNumber );
         }
+
 		static public void WriteContactDictionary(Dictionary<Contact, List<Contact>> dict)
 		{
-			foreach (var item in dict)
+			foreach (var item in dict.Keys)
 			{
-				WriteContact(item.Key);
+				WriteContact(item);
 			}
 		}
 		static public Contact AddContact() 
@@ -29,38 +27,83 @@ namespace Phone_Book_App.Classes.Utilities
 			int x = Inputs.OptionInput(new List<string> { "1 - Pronađi kontakt po imenu i prezimenu", "2 - Pronađi po broju" });
 			if (x == 1)
 			{
-				var name = Inputs.StringInput("Unesi ime kontakta");
-				var surename = Inputs.StringInput("Unesi prezime kontakta");
-				var contacts = new List<Contact>();
-				foreach (var item in dict.Keys)
+				return FindContactByName(dict);
+			}
+			else if (x == 2)
+			{
+				return FindContactByNumber(dict);
+			}
+			return new Contact("", "", 0);
+
+		}
+		static public Contact FindContactByName(Dictionary<Contact, List<Contact>> dict)
+		{
+			var name = Inputs.StringInput("Unesi ime kontakta");
+			var surename = Inputs.StringInput("Unesi prezime kontakta");
+			var contacts = new List<Contact>();
+			foreach (var item in dict.Keys)
+			{
+				if (item.Name == name && item.Surename == surename)
 				{
-					if (item.Name == name && item.Surename == surename)
-					{
-						contacts.Add(item);
-					}
-				}
-				if (contacts.Count() > 1)
-				{
-					var i = 0;
-					foreach (var item in contacts)
-					{
-						Console.WriteLine("Odaberi" + i);
-						Utilities.WriteContact(item);
-						i++;
-					}
-					x = Inputs.OptionInput(new List<string>());
-					return contacts[x - 1];
-				}
-				else if (x == 0)
-				{
-				    Console.WriteLine("Kontakt nije pronađen");
-					return new Contact("","", 0 );	
-				}
-				else
-				{
-					return contacts[0];
+					contacts.Add(item);
 				}
 			}
+			if (contacts.Count() > 1)
+			{
+				var i = 0;
+				foreach (var item in contacts)
+				{
+					Console.WriteLine("Za ovaj kontakt daberi - " + i);
+					Utilities.WriteContact(item);
+					i++;
+				}
+				var x = Inputs.RangeElementInput(1, i, "");
+				return contacts[x - 1];
+			}
+			else if (contacts.Count() == 0)
+			{
+				Console.WriteLine("Kontakt nije pronađen");
+			}
+			return new Contact("","",0);
 		}
+		static public Contact FindContactByNumber(Dictionary<Contact, List<Contact>> dict)
+		{
+			var phoneNumber = Inputs.LongInput("Unesi broj mobitela");
+			foreach (var item in dict.Keys)
+			{
+				if (item.PhineNumber == phoneNumber)
+				{
+					return item;
+				}
+			}
+			return new Contact("", "", 0);
+		}
+		static public Preferences EditPreference() 
+		{
+			var x = Inputs.OptionInput(new List<string> { "Favorit", "Normalan", "Blokiran" });
+			switch (x)
+			{
+				case 1:
+					return Preferences.Favourite;
+					break;
+				case 2:
+					return Preferences.Normal;
+					break;
+				case 3:
+					return Preferences.Blocked;
+					break;
+			}
+			return Preferences.Normal;
+		}
+		//static public List<Contact> SortContactsByDate(Dictionary<Contact, List<Contact>> dict) 
+		//{
+		//	var contacts = new List<Contact>(dict.Keys);
+		//	var listOfAllDates = new List<DateTime>();
+		//	var sortedList = new List<Contact>();
+		//	foreach (var item in contacts)
+		//	{
+		//		listOfAllDates.Add(item);
+		//	}
+		//}
 	}
 }

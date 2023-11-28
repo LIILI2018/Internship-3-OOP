@@ -84,5 +84,19 @@ namespace Phone_Book_App.Classes.Utilities
 			Console.Clear();
 			return y;
 		}
+		public static int RangeElementInput(int num1, int num2, string txt)
+		{
+			Console.WriteLine(txt);
+			int y;
+			bool success = false;
+			do
+			{
+				success = int.TryParse(Console.ReadLine(), out y);
+			} while (!success || y <= num1 || y>= num2);
+			Console.Clear();
+
+			return y;
+		}
+
 	}
 }
