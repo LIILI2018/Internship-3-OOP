@@ -32,7 +32,6 @@ var ContactDictionary = new Dictionary<Contact, List<Call>>()
 	{defaultContacts[6],DefaultCalls}
 };
 
-
 StartMenu();
 
 void StartMenu() {
@@ -43,25 +42,26 @@ void StartMenu() {
 		
 		switch (x)
 		{	
-			//+ +
+			// + +
 			case 1:
 				Contact.WriteContactDictionary(ContactDictionary);
 				Inputs.Wait("");
 				break;
-			//+ +
+			// + +
 			case 2:
 				ContactDictionary.Add(Contact.AddContact(ContactDictionary), new List<Call>());
 				break;
-			//
+			// + +
 			case 3:
 				var contact = Contact.FindContact(ContactDictionary);
                 ContactDictionary.Remove(contact);
 				break;
-
+			// + +
 			case 4:
 				contact = Contact.FindContact(ContactDictionary);
 				contact.Preferences = Contact.EditPreference();
 				break;
+
 			case 5:
 				OpenSubmenu();
 				break;

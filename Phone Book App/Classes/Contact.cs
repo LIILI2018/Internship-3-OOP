@@ -16,12 +16,12 @@ namespace Phone_Book_App.Classes
             Name = name; Surename = surename; PhoneNumber = phoneNumber;
         }
 
-		//
+		//+ +
 		static public void WriteContact(Contact contact)
 		{
-			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber);
+			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber+ "              "+contact.Preferences);
 		}
-		//
+		//+ +
 		static public void WriteContactDictionary(Dictionary<Contact, List<Call>> dict)
 		{
 			foreach (var item in dict.Keys)
@@ -34,29 +34,26 @@ namespace Phone_Book_App.Classes
 		{
 			var name = Inputs.StringInput("Unesi ime kontakta: ");
 			var surename = Inputs.StringInput("Unesi prezime kontakta: ");
-			var phoneNumber = Inputs.StringInput("Unesi Broj kontakta: ");
+			var phoneNumber = Inputs.PhoneNumberInput();
 			while (CheckIfNumberIsTaken(dict,phoneNumber))
 			{
-				phoneNumber = Inputs.StringInput("Broj je već zauzet unesi novi: ");
+				phoneNumber = Inputs.PhoneNumberInput();
 			}
 			var newContact = new Contact(name, surename, phoneNumber);
 			return newContact;
 		}
-		//
+		//+ +
 		static public Preferences EditPreference()
 		{
-			var x = Inputs.OptionInput(new List<string> { "Favorit", "Normalan", "Blokiran" });
+			var x = Inputs.OptionInput(new List<string> { "1 - Favorit", "2 - Normalan", "3 - Blokiran" });
 			switch (x)
 			{
 				case 1:
 					return Preferences.Favourite;
-					break;
 				case 2:
 					return Preferences.Normal;
-					break;
 				case 3:
 					return Preferences.Blocked;
-					break;
 			}
 			return Preferences.Normal;
 		}
@@ -114,7 +111,7 @@ namespace Phone_Book_App.Classes
 		static private Contact FindContactByNumber(Dictionary<Contact, List<Call>> dict)
 		{
 			var numberFound = false;
-			var phoneNumber = Inputs.StringInput("Unesi broj mobitela");
+			var phoneNumber = Inputs.PhoneNumberInput();
 			foreach (var item in dict.Keys)
 			{
 				if (item.PhoneNumber == phoneNumber)
@@ -130,6 +127,7 @@ namespace Phone_Book_App.Classes
 			return new Contact("", "", "");
 
 		}
+		//+ +
 		static private bool CheckIfNumberIsTaken(Dictionary<Contact, List<Call>> dict, string phoneNumber)
 		{
 			foreach (var item in dict.Keys)

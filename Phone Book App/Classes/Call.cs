@@ -1,4 +1,5 @@
 ﻿using Phone_Book_App.Classes.Enums;
+using Phone_Book_App.Classes.Utilities;
 
 namespace Phone_Book_App.Classes
 {
@@ -14,6 +15,9 @@ namespace Phone_Book_App.Classes
 		{
 			CallStart = DateTime.Now;
 		}
+
+
+		//+ +
 		static public List<Call> SortCallsByDate(List<Call> calls)
 		{
 			var listOfAllDates = new List<DateTime>();
@@ -23,20 +27,20 @@ namespace Phone_Book_App.Classes
 				listOfAllDates.Add(item.CallStart);
 			}
 			listOfAllDates.Sort();
-			foreach (var date in listOfAllDates)
+            foreach (var date in listOfAllDates)
 			{
 				foreach (var call in calls)
 				{
 					if (date == call.CallStart)
 					{
 						sortedList.Add(call);
-						sortedList.Remove(call);
 						break;
 					}
 				}
 			}
 			return sortedList;
 		}
+		//+ +
 		static public void WriteCall(Call call)
 		{
 			Console.WriteLine("Poziv je uspostavljen: " + call.CallStart);
@@ -50,6 +54,7 @@ namespace Phone_Book_App.Classes
 			{
 				WriteCall(item);
 			}
+			Inputs.Wait("");
 		}
 
 
