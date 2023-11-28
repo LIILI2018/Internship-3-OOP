@@ -1,6 +1,9 @@
 ﻿using Phone_Book_App.Classes;
 using Phone_Book_App.Classes.Utilities;
 
+Console.WriteLine(Inputs.OptionInput(new List<string> { "", "", "", "" }));
+Console.ReadLine();
+/*
 var defaultContacts = new List<Contact>() 
 {
 	new Contact("Luko","Paljetak",0913630556),
@@ -77,4 +80,4 @@ void OpenSubmenu()
 			break;
 
 	}
-}
+}*/

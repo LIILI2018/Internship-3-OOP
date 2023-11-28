@@ -15,13 +15,6 @@ namespace Phone_Book_App.Classes
         {
             Name = name; Surename = surename; PhoneNumber = phoneNumber;
         }
-		public Contact()
-		{
-			Name = "";
-			Surename = "";
-			PhoneNumber = 0;
-		}
-
 
 		static public Preferences EditPreference()
 		{
