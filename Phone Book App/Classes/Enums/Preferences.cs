@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Phone_Book_App.Classes
+namespace Phone_Book_App.Classes.Enums
 {
-	public enum Preferences
-	{
-		Favourite,
-		Normal,
-		Blocked
-	}
+    public enum Preferences
+    {
+        Favourite,
+        Normal,
+        Blocked
+    }
 }

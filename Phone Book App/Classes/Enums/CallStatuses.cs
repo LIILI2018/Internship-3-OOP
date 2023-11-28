@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Phone_Book_App.Classes.Enums
 {
-	internal class CallStatuses
+	public enum CallStatuses
 	{
+		InProgress,
+		Missed,
+		Finished
 	}
 }
