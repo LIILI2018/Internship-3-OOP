@@ -102,16 +102,17 @@ namespace Phone_Book_App.Classes.Utilities
 			Console.Clear();
 			return y;
 		}
-		// + +
+		// + + +
 		public static string PhoneNumberInput()
 		{
-			Console.WriteLine("Unesi telefonski broj (mora imati 9-10 znamenki): ");
-			var y = Console.ReadLine();
-			while (y.Length>10 ||y.Length<9)
+			Console.WriteLine();
+			string y;
+			bool success = false;
+			do
 			{
-                Console.WriteLine("Unesi ponovo: ");
-                y = Console.ReadLine();
-			}
+				y = Inputs.StringInput("Unesi telefonski broj (mora imati 9-10 znamenki)");
+				success = long.TryParse(y, out _ );
+			} while (y.Length > 10 || y.Length < 9 || !success);
 			Console.Clear();
 			return y;
 		}

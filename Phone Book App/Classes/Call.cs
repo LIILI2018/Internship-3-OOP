@@ -54,6 +54,19 @@ namespace Phone_Book_App.Classes
 			Console.WriteLine();
 		}
 		//+ +
+		static public void WriteAllCalls(Dictionary<Contact, List<Call>> dict)
+		{
+			foreach (var item in dict.Keys) 
+			{ 
+				Console.WriteLine(item.Name + " " + item.Surename + ": " + item.PhoneNumber + "      ");
+				foreach (var item2 in dict[item])
+				{
+					WriteCall(item2);
+
+				}
+			}
+		}
+		//+ +
 		static public void WriteCallsByDate(List<Call> calls)
 		{
 			var sortedCalls = SortCallsByDate(calls);
@@ -64,46 +77,35 @@ namespace Phone_Book_App.Classes
 			Inputs.Wait("");
 		}
 
-		//
+		//+
 		static public void CreateNewCall(Dictionary<Contact, List<Call>> dict)
 		{
 			var contact = Contact.FindContact(dict);
-			if (contact.Preferences != Preferences.Blocked) {
-				if (new Random().Next(1, 4) == 1)
+			if (contact.PhoneNumber != "")
+			{
+				if (contact.Preferences != Preferences.Blocked)
 				{
-					dict[contact].Add(new Call(CallStatuses.Missed));
-					Inputs.Wait("Osoba nije odgovorila na poziv");
+					if (new Random().Next(1, 4) == 1)
+					{
+						dict[contact].Add(new Call(CallStatuses.Missed));
+						Inputs.Wait("Osoba nije odgovorila na poziv");
+					}
+					else
+					{
+						var newCall = new Call(CallStatuses.InProgress);
+						dict[contact].Add(newCall);
+						Inputs.Wait("Poziv uspješno uspostavljen");
+						for (int i = new Random().Next(1, 21); i > 0; i--)
+						{
+							Console.WriteLine("Poziv traje još: " + i + " sekundi");
+							Thread.Sleep(1000);
+						}
+						newCall.CallStatus = CallStatuses.Finished;
+					}
 				}
 				else
 				{
-					var newCall = new Call(CallStatuses.InProgress);
-					dict[contact].Add(newCall);
-					Inputs.Wait("Poziv uspješno uspostavljen");
-					for (int i = new Random().Next(1, 21); i > 0; i--)
-					{
-						Console.WriteLine("Poziv traje još: " + i + " sekundi");
-						Thread.Sleep(1000);
-					}
-					newCall.CallStatus = CallStatuses.Finished;
-				}
-			}
-			else
-			{
-                Inputs.Wait("Nije moguče uspostaviti poziv sa blokiranom osobom");
-            }
-		}
-
-		
-		//+ +
-		static public void WriteAllCalls(Dictionary<Contact, List<Call>> dict)
-		{
-			foreach (var item in dict.Keys) 
-			{ 
-				Console.WriteLine(item.Name + " " + item.Surename + ": " + item.PhoneNumber + "      ");
-				foreach (var item2 in dict[item])
-				{
-					WriteCall(item2);
-
+					Inputs.Wait("Nije moguče uspostaviti poziv sa blokiranom osobom");
 				}
 			}
 		}

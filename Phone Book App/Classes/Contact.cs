@@ -16,6 +16,11 @@ namespace Phone_Book_App.Classes
             Name = name; Surename = surename; PhoneNumber = phoneNumber;
         }
 
+		public Contact()
+		{
+			Name = ""; Surename = ""; PhoneNumber = "";
+		}
+
 		//+ +
 		static public void WriteContact(Contact contact)
 		{
@@ -29,7 +34,7 @@ namespace Phone_Book_App.Classes
 				WriteContact(item);
 			}
 		}
-		// + +
+		//+ + +
 		static public Contact AddContact(Dictionary<Contact, List<Call>> dict)
 		{
 			var name = Inputs.StringInput("Unesi ime kontakta: ");
@@ -37,7 +42,8 @@ namespace Phone_Book_App.Classes
 			var phoneNumber = Inputs.PhoneNumberInput();
 			while (CheckIfNumberIsTaken(dict,phoneNumber))
 			{
-				phoneNumber = Inputs.PhoneNumberInput();
+                Console.WriteLine("Broj je već u imeniku, unesi novi broj: ");
+                phoneNumber = Inputs.PhoneNumberInput();
 			}
 			var newContact = new Contact(name, surename, phoneNumber);
 			return newContact;
@@ -69,7 +75,7 @@ namespace Phone_Book_App.Classes
 			{
 				return FindContactByNumber(dict);
 			}
-			return new Contact("", "", "");
+			return new Contact();
 
 		}
 		//+ +
@@ -91,20 +97,20 @@ namespace Phone_Book_App.Classes
 				foreach (var item in contacts)
 				{
 					Console.WriteLine("Za ovaj kontakt daberi - " + i);
-					//Contact.WriteContact(item);
+					Contact.WriteContact(item);
 					i++;
 				}
 				var x = Inputs.RangeElementInput(1, i, "");
 				return contacts[x - 1];
 			}
-			else if (contacts.Count() == 0)
-			{
-				Console.WriteLine("Kontakt nije pronađen");
-				Inputs.Wait("");
-				return new Contact("","","");
+			else if (contacts.Count() == 1)
+			{	
+				return contacts[0];
+
 			}
 			else { 
-				return contacts[0];
+				Inputs.Wait("Kontakt nije pronađen");
+				return new Contact();
 			}
 		}
 		//+ +
@@ -124,7 +130,7 @@ namespace Phone_Book_App.Classes
 			{
 				Inputs.Wait("Broj nije pronađen");
 			}
-			return new Contact("", "", "");
+			return new Contact();
 
 		}
 		//+ +
@@ -139,6 +145,5 @@ namespace Phone_Book_App.Classes
 			}
 			return false;
 		}
-
 	}
 }

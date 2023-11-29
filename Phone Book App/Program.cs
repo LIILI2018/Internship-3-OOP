@@ -10,8 +10,6 @@ var defaultContacts = new List<Contact>()
 	new Contact("Ivan","Leptirić","1639653474"),
 	new Contact("Dušan","Stijena","1493273434"),
 	new Contact("Kapetan Ivan","Slavuj","1"),
-	new Contact("a","a","0987654322")
-
 };
 var DefaultCalls = new List<Call>
 {
@@ -38,7 +36,7 @@ void StartMenu() {
 	int x;
 	do {  
 		Console.Clear();
-		x = Inputs.OptionInput(new List<string> { "1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Editiranje preferenca kontakta", "5 - Upravljanje kontaktom","6 - Ispis svih pozia","7 -izlaz iz aplikacije" });
+		x = Inputs.OptionInput(new List<string> { "1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Uređivanje preferenca", "5 - Upravljanje pozivima","6 - Ispis svih pozia","7 - Izlaz iz aplikacije" });
 		
 		switch (x)
 		{	
@@ -76,20 +74,22 @@ void StartMenu() {
 void OpenSubmenu()
 {
 	int x;
-	x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve pozive", "2 - Kreirej novi poziv","3 - Izađi iz submenua"});
+	x = Inputs.OptionInput(new List<string> { "1 - Ispiši sve pozive s nekom osobom", "2 - Stvori novi poziv","3 - Izađi iz submenua"});
 	switch (x)
 	{
 		//+ +
 		case 1:
 			var contact = Contact.FindContact(ContactDictionary);
-			Call.WriteCallsByDate(ContactDictionary[contact]);
+            if (contact.PhoneNumber != "")
+			{
+				Call.WriteCallsByDate(ContactDictionary[contact]);
+			}
 			break;
-
+		// + +
 		case 2:
 			Call.CreateNewCall(ContactDictionary);
 			break;
 		case 3:
-			StartMenu();
 			break;
 	}
 }
