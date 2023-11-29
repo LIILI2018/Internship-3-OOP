@@ -46,6 +46,7 @@ namespace Phone_Book_App.Classes
                 phoneNumber = Inputs.PhoneNumberInput();
 			}
 			var newContact = new Contact(name, surename, phoneNumber);
+			Inputs.Wait("Kontakt Uspješno unesen");
 			return newContact;
 		}
 		//+ +
