@@ -1,7 +1,7 @@
 ﻿using Phone_Book_App.Classes;
 using Phone_Book_App.Classes.Utilities;
 
-var defaultContacts = new List<Contact>() 
+var defaultContacts = new List<Contact>()
 {
 	new Contact("Luko","Paljetak","0913630551"),
 	new Contact("Luko","Paljetak","0913630555"),
@@ -24,7 +24,7 @@ var ContactDictionary = new Dictionary<Contact, List<Call>>()
 	{defaultContacts[0],new List<Call>(DefaultCalls)},
 	{defaultContacts[1],new List<Call>(DefaultCalls)},
 	{defaultContacts[2],new List<Call>(DefaultCalls)},
-	{defaultContacts[3],new List<Call>(DefaultCalls)},
+	{defaultContacts[3],new List< Call>(DefaultCalls)},
 	{defaultContacts[4],new List < Call >(DefaultCalls)},
 	{defaultContacts[5],new List < Call >(DefaultCalls)},
 	{defaultContacts[6],new List < Call >(DefaultCalls)}
@@ -32,14 +32,16 @@ var ContactDictionary = new Dictionary<Contact, List<Call>>()
 
 StartMenu();
 
-void StartMenu() {
+void StartMenu()
+{
 	int x;
-	do {  
+	do
+	{
 		Console.Clear();
-		x = Inputs.OptionInput(new List<string> { "1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Uređivanje preferenca", "5 - Upravljanje pozivima","6 - Ispis svih pozia","7 - Izlaz iz aplikacije" });
-		
+		x = Inputs.OptionInput(new List<string> { "1 - Ispiši sve kontakte", "2 - Dodaj novi kontakt u imenik", "3 - Brisanje kontakata iz imenika", "4 - Uređivanje preferenca", "5 - Upravljanje pozivima", "6 - Ispis svih pozia", "7 - Izlaz iz aplikacije" });
+
 		switch (x)
-		{	
+		{
 			// + +
 			case 1:
 				Contact.WriteContactDictionary(ContactDictionary);
@@ -52,7 +54,7 @@ void StartMenu() {
 			// + +
 			case 3:
 				var contact = Contact.FindContact(ContactDictionary);
-                ContactDictionary.Remove(contact);
+				ContactDictionary.Remove(contact);
 				break;
 			// + +
 			case 4:
@@ -74,13 +76,13 @@ void StartMenu() {
 void OpenSubmenu()
 {
 	int x;
-	x = Inputs.OptionInput(new List<string> { "1 - Ispiši sve pozive s nekom osobom", "2 - Stvori novi poziv","3 - Izađi iz submenua"});
+	x = Inputs.OptionInput(new List<string> { "1 - Ispiši sve pozive s nekom osobom", "2 - Stvori novi poziv", "3 - Izađi iz submenua" });
 	switch (x)
 	{
 		//+ +
 		case 1:
 			var contact = Contact.FindContact(ContactDictionary);
-            if (contact.PhoneNumber != "")
+			if (contact.PhoneNumber != "")
 			{
 				Call.WriteCallsByDate(ContactDictionary[contact]);
 			}

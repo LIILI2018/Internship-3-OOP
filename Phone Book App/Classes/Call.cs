@@ -1,6 +1,5 @@
 ﻿using Phone_Book_App.Classes.Enums;
 using Phone_Book_App.Classes.Utilities;
-using System.Security.Cryptography;
 
 namespace Phone_Book_App.Classes
 {

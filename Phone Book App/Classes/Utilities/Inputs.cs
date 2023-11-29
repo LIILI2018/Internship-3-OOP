@@ -1,7 +1,7 @@
 ﻿
 namespace Phone_Book_App.Classes.Utilities
 {
-	public class Inputs
+	static public class Inputs
 	{
 		// + +
 		public static int IntInput(string txt)
