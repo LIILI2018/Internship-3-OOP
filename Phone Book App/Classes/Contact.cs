@@ -17,16 +17,20 @@ namespace Phone_Book_App.Classes
         }
 
 		//+ +
-		static public void WriteContact(Contact contact)
+		static public void WriteContact(Contact contact, List<Call> calls)
 		{
-			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber+ "              "+contact.Preferences);
+			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber+ "      ");
+			foreach (var item in calls)
+			{
+                Console.WriteLine(item.CallStart);
+            }
 		}
 		//+ +
 		static public void WriteContactDictionary(Dictionary<Contact, List<Call>> dict)
 		{
 			foreach (var item in dict.Keys)
 			{
-				WriteContact(item);
+				WriteContact(item, dict[item]);
 			}
 		}
 		// + +
@@ -91,7 +95,7 @@ namespace Phone_Book_App.Classes
 				foreach (var item in contacts)
 				{
 					Console.WriteLine("Za ovaj kontakt daberi - " + i);
-					Contact.WriteContact(item);
+					//Contact.WriteContact(item);
 					i++;
 				}
 				var x = Inputs.RangeElementInput(1, i, "");

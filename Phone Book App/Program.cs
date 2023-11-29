@@ -10,7 +10,7 @@ var defaultContacts = new List<Contact>()
 	new Contact("Ivan","Leptirić","1639653474"),
 	new Contact("Dušan","Stijena","1493273434"),
 	new Contact("Kapetan Ivan","Slavuj","1"),
-	new Contact("Max","Verstapen","0")
+	new Contact("a","a","0987654322")
 
 };
 var DefaultCalls = new List<Call>
@@ -23,13 +23,13 @@ var DefaultCalls = new List<Call>
 };
 var ContactDictionary = new Dictionary<Contact, List<Call>>()
 {
-	{defaultContacts[0],DefaultCalls},
-	{defaultContacts[1],DefaultCalls},
-	{defaultContacts[2],DefaultCalls},
-	{defaultContacts[3],DefaultCalls},
-	{defaultContacts[4],DefaultCalls},
-	{defaultContacts[5],DefaultCalls},
-	{defaultContacts[6],DefaultCalls}
+	{defaultContacts[0],new List<Call>(DefaultCalls)},
+	{defaultContacts[1],new List<Call>(DefaultCalls)},
+	{defaultContacts[2],new List<Call>(DefaultCalls)},
+	{defaultContacts[3],new List<Call>(DefaultCalls)},
+	{defaultContacts[4],new List < Call >(DefaultCalls)},
+	{defaultContacts[5],new List < Call >(DefaultCalls)},
+	{defaultContacts[6],new List < Call >(DefaultCalls)}
 };
 
 StartMenu();
@@ -76,12 +76,14 @@ void OpenSubmenu()
 	x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve pozive", "2 - Kreirej novi poziv"});
 	switch (x)
 	{
+		//+ +
 		case 1:
 			var contact = Contact.FindContact(ContactDictionary);
 			Call.WriteCallsByDate(ContactDictionary[contact]);
 			break;
 
 		case 2:
+			Call.CreateNewCall(ContactDictionary);
 			break;
 
 	}

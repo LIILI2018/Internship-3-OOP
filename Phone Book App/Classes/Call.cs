@@ -1,5 +1,6 @@
 ﻿using Phone_Book_App.Classes.Enums;
 using Phone_Book_App.Classes.Utilities;
+using System.Security.Cryptography;
 
 namespace Phone_Book_App.Classes
 {
@@ -14,6 +15,11 @@ namespace Phone_Book_App.Classes
 		public Call()
 		{
 			CallStart = DateTime.Now;
+		}
+		public Call(CallStatuses callStatus)
+		{
+			CallStart = DateTime.Now;
+			CallStatus = callStatus;
 		}
 
 
@@ -47,6 +53,7 @@ namespace Phone_Book_App.Classes
 			Console.WriteLine("Status poziva: " + call.CallStatus);
 			Console.WriteLine();
 		}
+		//+ +
 		static public void WriteCallsByDate(List<Call> calls)
 		{
 			var sortedCalls = SortCallsByDate(calls);
@@ -57,6 +64,33 @@ namespace Phone_Book_App.Classes
 			Inputs.Wait("");
 		}
 
-
+		//
+		static public void CreateNewCall(Dictionary<Contact, List<Call>> dict)
+		{
+			var contact = Contact.FindContact(dict);
+			if (contact.Preferences != Preferences.Blocked) {
+				if (new Random().Next(1, 4) == 1)
+				{
+					dict[contact].Add(new Call(CallStatuses.Missed));
+					Inputs.Wait("Osoba nije odgovorila na poziv");
+				}
+				else
+				{
+					var newCall = new Call(CallStatuses.InProgress);
+					dict[contact].Add(newCall);
+					Inputs.Wait("Poziv uspješno uspostavljen");
+					for (int i = new Random().Next(1, 21); i > 0; i--)
+					{
+						Console.WriteLine("Poziv traje još: " + i + " sekundi");
+						Thread.Sleep(1000);
+					}
+					newCall.CallStatus = CallStatuses.Finished;
+				}
+			}
+			else
+			{
+                Inputs.Wait("Nije moguče uspostaviti poziv sa blokiranom osobom");
+            }
+		}
 	}
 }
