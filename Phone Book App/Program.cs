@@ -9,7 +9,7 @@ var defaultContacts = new List<Contact>()
 	new Contact("Petar","Stijena","0987654321"),
 	new Contact("Ivan","Leptirić","1639653474"),
 	new Contact("Dušan","Stijena","1493273434"),
-	new Contact("Kapetan Ivan","Slavuj","1"),
+	new Contact("Kapetan Ivan","Slavuj","0000000000"),
 };
 var DefaultCalls = new List<Call>
 {
@@ -59,11 +59,11 @@ void StartMenu() {
 				contact = Contact.FindContact(ContactDictionary);
 				contact.Preferences = Contact.EditPreference();
 				break;
-
+			//+ +
 			case 5:
 				OpenSubmenu();
 				break;
-
+			//+ +
 			case 6:
 				Call.WriteAllCalls(ContactDictionary);
 				Inputs.Wait("");

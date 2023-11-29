@@ -22,7 +22,7 @@ namespace Phone_Book_App.Classes
 		}
 
 		//+ +
-		static public void WriteContact(Contact contact)
+		static private void WriteContact(Contact contact)
 		{
 			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber);
 		}

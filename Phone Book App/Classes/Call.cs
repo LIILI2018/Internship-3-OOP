@@ -24,7 +24,7 @@ namespace Phone_Book_App.Classes
 
 
 		//+ +
-		static public List<Call> SortCallsByDate(List<Call> calls)
+		static private List<Call> SortCallsByDate(List<Call> calls)
 		{
 			var listOfAllDates = new List<DateTime>();
 			var sortedList = new List<Call>();
@@ -47,7 +47,7 @@ namespace Phone_Book_App.Classes
 			return sortedList;
 		}
 		//+ +
-		static public void WriteCall(Call call)
+		static private void WriteCall(Call call)
 		{
 			Console.WriteLine("Poziv je uspostavljen: " + call.CallStart);
 			Console.WriteLine("Status poziva: " + call.CallStatus);
@@ -76,8 +76,7 @@ namespace Phone_Book_App.Classes
 			}
 			Inputs.Wait("");
 		}
-
-		//+
+		//+ +
 		static public void CreateNewCall(Dictionary<Contact, List<Call>> dict)
 		{
 			var contact = Contact.FindContact(dict);
