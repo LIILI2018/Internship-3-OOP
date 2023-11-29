@@ -65,7 +65,10 @@ void StartMenu() {
 			case 5:
 				OpenSubmenu();
 				break;
+
 			case 6:
+				Call.WriteAllCalls(ContactDictionary);
+				Inputs.Wait("");
 				break;
 		}
 	} while (x != 7);
@@ -73,7 +76,7 @@ void StartMenu() {
 void OpenSubmenu()
 {
 	int x;
-	x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve pozive", "2 - Kreirej novi poziv"});
+	x = Inputs.OptionInput(new List<string> { " 1 - Ispiši sve pozive", "2 - Kreirej novi poziv","3 - Izađi iz submenua"});
 	switch (x)
 	{
 		//+ +
@@ -85,6 +88,8 @@ void OpenSubmenu()
 		case 2:
 			Call.CreateNewCall(ContactDictionary);
 			break;
-
+		case 3:
+			StartMenu();
+			break;
 	}
 }

@@ -6,9 +6,9 @@ namespace Phone_Book_App.Classes
 {
     public class Contact
     {
-        private string Name { get; set; }
-        private string Surename { get; set; }
-        private string  PhoneNumber { get; set; }
+        public string Name { get; set; }
+		public string Surename { get; set; }
+		public string  PhoneNumber { get; set; }
         public Preferences Preferences { get; set; } = Preferences.Normal;
 
         public Contact(string name, string surename, string phoneNumber) 
@@ -17,20 +17,16 @@ namespace Phone_Book_App.Classes
         }
 
 		//+ +
-		static public void WriteContact(Contact contact, List<Call> calls)
+		static public void WriteContact(Contact contact)
 		{
-			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber+ "      ");
-			foreach (var item in calls)
-			{
-                Console.WriteLine(item.CallStart);
-            }
+			Console.WriteLine(contact.Name + " " + contact.Surename + ": " + contact.PhoneNumber);
 		}
 		//+ +
 		static public void WriteContactDictionary(Dictionary<Contact, List<Call>> dict)
 		{
 			foreach (var item in dict.Keys)
 			{
-				WriteContact(item, dict[item]);
+				WriteContact(item);
 			}
 		}
 		// + +

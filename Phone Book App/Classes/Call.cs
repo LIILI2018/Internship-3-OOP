@@ -8,10 +8,6 @@ namespace Phone_Book_App.Classes
 	{
 		public DateTime CallStart { get; set; }
 		public CallStatuses CallStatus { get; set; } = CallStatuses.Finished;
-        public Call(DateTime startTime)
-        {
-            CallStart = startTime;
-        }
 		public Call()
 		{
 			CallStart = DateTime.Now;
@@ -21,6 +17,10 @@ namespace Phone_Book_App.Classes
 			CallStart = DateTime.Now;
 			CallStatus = callStatus;
 		}
+        public Call(DateTime startTime)
+        {
+            CallStart = startTime;
+        }
 
 
 		//+ +
@@ -91,6 +91,21 @@ namespace Phone_Book_App.Classes
 			{
                 Inputs.Wait("Nije moguče uspostaviti poziv sa blokiranom osobom");
             }
+		}
+
+		
+		//+ +
+		static public void WriteAllCalls(Dictionary<Contact, List<Call>> dict)
+		{
+			foreach (var item in dict.Keys) 
+			{ 
+				Console.WriteLine(item.Name + " " + item.Surename + ": " + item.PhoneNumber + "      ");
+				foreach (var item2 in dict[item])
+				{
+					WriteCall(item2);
+
+				}
+			}
 		}
 	}
 }
